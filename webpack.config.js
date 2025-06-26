@@ -16,7 +16,7 @@ const config = {
   mode,
 
   // the main file webpack starts bundling from
-  entry: "./srs/Client.jsx",
+  entry: "./src/Client.jsx",
 
   module: {
     rules: [
@@ -50,19 +50,16 @@ const config = {
     //enables support for rsc on client bundle
     new ReactServerWebpackPlugin({ isServer: false }),
   ],
+  // how code-split chunks are named (with content hash in production for cache busting)
+  //output directory for build
+  //name for the main bundle
+  //cleans the output directory before each build
   output: {
-    // how code-split chunks are named (with content hash in production for cache busting)
-    chunkFileName: development
-      ? ["[id].chunk.js"]
+    chunkFilename: development
+      ? "[id].chunk.js"
       : "[id].[contenthash].chunk.js",
-
-    //output directory for build
     path: path.resolve(__dirname, "dist"),
-
-    //name for the main bundle
     filename: "[name].js",
-
-    //cleans the output directory before each build
     clean: true,
   },
 

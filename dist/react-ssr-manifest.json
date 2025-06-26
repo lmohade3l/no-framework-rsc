@@ -1,0 +1,14 @@
+{
+  "moduleLoading": {
+    "prefix": "auto",
+    "crossOrigin": null
+  },
+  "moduleMap": {
+    "./src/ClientComponent.jsx": {
+      "*": {
+        "specifier": "file:///Users/mohadese/Documents/projects/rsc-no-framework/src/ClientComponent.jsx",
+        "name": "*"
+      }
+    }
+  }
+}
