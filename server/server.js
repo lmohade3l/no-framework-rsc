@@ -1,0 +1,9 @@
+const path = require("node:path");
+const { readFileSync } = require("node:fs");
+const Fastify = require("fastify");
+const fastifyStaticPlugin = require("@fastify/static");
+const React = require("react");
+const { renderToPipeableStream } = require("react-server-dom-webpack/server");
+const AppImport = require("../src/App.jsx");
+
+const App = AppImport.default;
