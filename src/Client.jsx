@@ -12,4 +12,3 @@ console.log("rendering root", p);
 
 // this goes and gets the markup from the server and render's gonna await on that promise to be done and then it'll be rendered
 root.render(p);
-console.log("hi i fethced it")
