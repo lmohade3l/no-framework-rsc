@@ -9,7 +9,8 @@ const AppImport = require("../src/App.jsx");
 const App = AppImport.default;
 
 const MANIFEST = readFileSync(
-  path.resolve(__dirname, "../dist/react-client-manifest.json") , "utf8"
+  path.resolve(__dirname, "../dist/react-client-manifest.json"),
+  "utf8"
 );
 
 const MODULE_MAP = JSON.parse(MANIFEST); // this is now ready to be passed to the webpack plugin
@@ -37,16 +38,30 @@ fastify.get("/", async function rootHandlre(request, reply) {
   return reply.sendFile("index.html");
 });
 
+// fastify.get("/react-flight", function reactFlightHandler(request, reply) {
+//   try {
+//     reply.header("Content-Type", "application/octet-stream");
+// return reply.send(`1:{"name":"App","env":"Server","key":null,"owner":null,"props":{}}
+// 0:D"$1"
+// 0:["$","div",null,{"children":["$","h1",null,{"children":"Notes App"},"$1"]},"$1"]
+// `);
+//   } catch (error) {
+//     request.log.error("react-flight error", error);
+//     throw error;
+//   }
+// });
+
 fastify.get("/react-flight", function reactFlightHandler(request, reply) {
   try {
     reply.header("Content-Type", "application/octet-stream");
-return reply.send(`1:{"name":"App","env":"Server","key":null,"owner":null,"props":{}}
-0:D"$1"
-0:["$","div",null,{"children":["$","h1",null,{"children":"Notes App"},"$1"]},"$1"]
-`);
-  } catch (error) {
-    request.log.error("react-flight error", error);
-    throw error;
+    const { pipe } = renderToPipeableStream(
+      React.createElement(App),
+      MODULE_MAP
+    );
+    pipe(reply.raw);
+  } catch (err) {
+    request.log.error("react-flight err", err);
+    throw err;
   }
 });
 

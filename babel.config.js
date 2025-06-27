@@ -7,7 +7,7 @@ module.exports = {
       {
         runtime: "automatic",
         useSpread: true,
-        development: true,
+        development,
       },
     ],
   ],
